@@ -54,7 +54,9 @@ public class Login extends AppCompatActivity {
         }
         return true;
     }
-
+    private void showMessagesucces(String msg) {
+        FancyToast.makeText(this, msg, FancyToast.LENGTH_LONG,FancyToast.SUCCESS,false).show();
+    }
     private void showMessage(String msg) {
         FancyToast.makeText(this, msg, FancyToast.LENGTH_LONG,FancyToast.ERROR,false).show();
     }
@@ -67,6 +69,7 @@ public class Login extends AppCompatActivity {
                 if (response.equals("success1")) {
                     Intent intent = new Intent(Login.this, MenuAdmin.class);
                     intent.putExtra("username", stn);
+                    showMessagesucces("Login Berhasil");
                     startActivity(intent);
                     etname.setText(null);
                     etpassword.setText(null);
@@ -74,6 +77,7 @@ public class Login extends AppCompatActivity {
                 if (response.equals("success2")) {
                     Intent intent = new Intent(Login.this, MainActivity.class);
                     intent.putExtra("username", stn);
+                    showMessagesucces("Login Berhasil");
                     startActivity(intent);
                     etname.setText(null);
                     etpassword.setText(null);
@@ -81,6 +85,7 @@ public class Login extends AppCompatActivity {
                 if (response.equals("fail")) {
                     Intent intent = new Intent(Login.this, Login.class);
                     intent.putExtra("username", stn);
+                    showMessage("username atau password salah");
                     startActivity(intent);
                     etname.setText(null);
                     etpassword.setText(null);
