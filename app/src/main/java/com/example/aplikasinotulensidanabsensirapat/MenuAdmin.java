@@ -34,7 +34,9 @@ public class MenuAdmin extends AppCompatActivity {
     public void Biodata(View view){
         closDrawer(drawerLayout);
     }
-    public void Keluar(View view){
+    public void Absensi(View view){
+        Intent intent = new Intent(MenuAdmin.this,Absensi.class);
+        startActivity(intent);
     }
 
     public void Logout(View view){
