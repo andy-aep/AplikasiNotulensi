@@ -3,7 +3,10 @@ package com.example.aplikasinotulensidanabsensirapat;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.se.omapi.Session;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -22,6 +25,22 @@ public class Login extends AppCompatActivity {
 
     String stn;
     EditText etname, etpassword;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        SharedPreferences sharedPreferences = getSharedPreferences("UserSession",MODE_PRIVATE);
+        if(sharedPreferences.getString("Username",null) != null)
+        {
+            if(sharedPreferences.getString("Role",null).matches("2")) {
+                Intent intent = new Intent(Login.this, MainActivity.class);
+                startActivity(intent);
+            }else {
+                Intent intent = new Intent(Login.this, MenuAdmin.class);
+                startActivity(intent);
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +73,19 @@ public class Login extends AppCompatActivity {
         }
         return true;
     }
+    private void  Simpansession(String uname, String nama , String prodi , String kelas , String email , String foto, String role){
+        SharedPreferences sharedPreferences = getSharedPreferences("UserSession",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("Username",uname);
+        editor.putString("Name",nama);
+        editor.putString("Prodi",prodi);
+        editor.putString("Kelas",kelas);
+        editor.putString("Email",email);
+        editor.putString("Foto",foto);
+        editor.putString("Role",role);
+        editor.apply();
+        //showMessagesucces("sesion  tersimpan");
+    }
     private void showMessagesucces(String msg) {
         FancyToast.makeText(this, msg, FancyToast.LENGTH_LONG,FancyToast.SUCCESS,false).show();
     }
@@ -68,7 +100,8 @@ public class Login extends AppCompatActivity {
                 stn = etname.getText().toString();
                 if (response.equals("success1")) {
                     Intent intent = new Intent(Login.this, MenuAdmin.class);
-                    intent.putExtra("username", stn);
+                    //intent.putExtra("username", stn);
+                    Simpansession(stn,"admin","admin","admin","admin@gmail.com","http://192.168.1.4/api_app/gambar/avatar/","1");
                     showMessagesucces("Login Berhasil");
                     startActivity(intent);
                     etname.setText(null);
@@ -76,7 +109,8 @@ public class Login extends AppCompatActivity {
                 }
                 if (response.equals("success2")) {
                     Intent intent = new Intent(Login.this, MainActivity.class);
-                    intent.putExtra("username", stn);
+                    //intent.putExtra("username", stn);
+                    Simpansession(stn,"user","user","user","user@gmail.com","http://192.168.1.4/api_app/gambar/avatar/","2");
                     showMessagesucces("Login Berhasil");
                     startActivity(intent);
                     etname.setText(null);

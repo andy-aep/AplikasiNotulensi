@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InputUser"
+    android:orientation="vertical">
+
+    <include layout="@layout/menu_absen_toolbar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/editTextTextidrapat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:visibility="gone"
+             />
+        <EditText
+            android:id="@+id/editTextTextidnotulensi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:visibility="gone"
+            />
+        <EditText
+            android:id="@+id/editTextTextCatatan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/backgrounnd_edittext"
+            android:ems="10"
+            android:lines="8"
+            android:maxLines="10"
+            android:hint="Catatan"
+            android:gravity="top|start"
+            android:scrollbars="vertical"
+            android:inputType="textMultiLine"
+            android:padding="12dp"
+            android:text=""
+            android:textColorHint="@color/outline" />
+
+        <Button
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pilih Gambar"
+            android:visibility="gone"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/logo"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+
+
+    <RelativeLayout
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btn_input_notulensi"
+            android:layout_width="210dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:onClick="Simpaninputnotulensi"
+            android:text="Simpan" />
+    </RelativeLayout>
+
+</LinearLayout>

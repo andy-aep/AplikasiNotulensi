@@ -16,7 +16,7 @@
             <ImageView
                 android:layout_width="42dp"
                 android:layout_height="36dp"
-                android:onClick="back"
+                android:onClick="Back"
                 android:src="@drawable/ic_baseline_arrow_back_24"/>
         </LinearLayout>
         <LinearLayout

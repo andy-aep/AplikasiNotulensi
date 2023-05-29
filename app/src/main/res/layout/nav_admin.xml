@@ -96,11 +96,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Pens Attendace"
+                android:text="Kelola Rapat"
                 android:textSize="20dp"
                 android:padding="5dp"
                 android:textColor="@color/warna1"
-                android:onClick="Absensi"
+                android:onClick="Rapat"
                 android:layout_marginStart="10dp"/>
         </LinearLayout>
         <LinearLayout
@@ -139,11 +139,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Notulensi"
+                android:text="Kelola User"
                 android:textSize="20dp"
                 android:padding="5dp"
                 android:textColor="@color/warna1"
-                android:onClick="Notulensi"
+                android:onClick="User"
                 android:layout_marginStart="10dp"/>
         </LinearLayout>
         <LinearLayout

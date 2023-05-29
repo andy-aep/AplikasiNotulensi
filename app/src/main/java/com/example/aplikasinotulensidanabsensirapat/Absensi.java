@@ -1,38 +1,29 @@
 package com.example.aplikasinotulensidanabsensirapat;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
+public class Absensi {
+    String nip,nama,waktu;
 
-import android.graphics.Bitmap;
-import android.net.wifi.rtt.WifiRttManager;
-import android.os.Bundle;
-import android.widget.ImageView;
+    public String getNip() {
+        return nip;
+    }
 
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
-import com.journeyapps.barcodescanner.BarcodeEncoder;
+    public void setNip(String nip) {
+        this.nip = nip;
+    }
 
-import java.io.Writer;
+    public String getNama() {
+        return nama;
+    }
 
-public class Absensi extends AppCompatActivity {
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_absensi);
+    public String getWaktu() {
+        return waktu;
+    }
 
-        ImageView imageView = findViewById(R.id.qr_code);
-        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-        try {
-            BitMatrix bitMatrix = multiFormatWriter.encode("1", BarcodeFormat.QR_CODE,300,300);
-            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
-            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
-            imageView.setImageBitmap(bitmap);
-        }catch (WriterException e){
-            throw new RuntimeException(e);
-        }
+    public void setWaktu(String waktu) {
+        this.waktu = waktu;
     }
 }

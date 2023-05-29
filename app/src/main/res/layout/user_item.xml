@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/cardrapat">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_user"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tvrNamauser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nama User"
+                android:textSize="15dp"/>
+            <TextView
+                android:id="@+id/tvremailuser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:textSize="15dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tvrrole"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="role"
+                    android:textSize="10dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
