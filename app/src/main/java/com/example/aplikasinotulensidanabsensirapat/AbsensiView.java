@@ -52,16 +52,6 @@ public class AbsensiView extends AppCompatActivity {
             qrcoderapat = "1";
         }
         loaddata(qrcoderapat);
-        ImageView imageView = findViewById(R.id.qr_code);
-        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-        try {
-            BitMatrix bitMatrix = multiFormatWriter.encode(qrcoderapat, BarcodeFormat.QR_CODE,300,300);
-            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
-            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
-            imageView.setImageBitmap(bitmap);
-        }catch (WriterException e){
-            throw new RuntimeException(e);
-        }
 
 
     }

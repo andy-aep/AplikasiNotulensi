@@ -2,7 +2,7 @@ package com.example.aplikasinotulensidanabsensirapat;
 
 public class Endpoint {
 
-    //private static final String base_url = "http://172.30.20.4/api_app/";
+    //private static final String base_url = "http://192.168.1.14/api_app/";
     private static final String base_url = "http://192.168.1.4/api_app/";
     public static final String login_url = base_url + "login.php";
     public static final String scanabsen = base_url + "scanabsen.php";
@@ -16,4 +16,7 @@ public class Endpoint {
     public static final String getalluser = base_url + "getalluser.php";
     public static final String adduser = base_url + "adduser.php";
     public static final String edituser = base_url + "edituser.php";
+    public static final String tutupabsensi = base_url + "tutupabsensi.php";
+    public static final String ulangiabsensi = base_url + "ulangiabsensi.php";
+    public static final String batalkanabsensi = base_url + "batalkanabsensi.php";
 }

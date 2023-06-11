@@ -31,7 +31,7 @@ public class RapatDetail extends AppCompatActivity {
         startActivity(intent);
     }
     public void Absensi(View view){
-        Intent intent = new Intent(this, AbsensiView.class);
+        Intent intent = new Intent(this, Absensi_menu.class);
         intent.putExtra("id_rapat",getIntent().getExtras().getString("id_rapat"));
         startActivity(intent);
     }
