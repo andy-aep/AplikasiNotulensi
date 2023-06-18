@@ -26,6 +26,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.bumptech.glide.Glide;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -66,7 +67,8 @@ public class InputNotulensi extends AppCompatActivity {
                     {
                         InputStream inputStream=getContentResolver().openInputStream(filepath);
                         bitmap = BitmapFactory.decodeStream(inputStream);
-                        gmbr.setImageBitmap(bitmap);
+                        //gmbr.setImageBitmap(bitmap);
+                        Glide.with(InputNotulensi.this).load(bitmap).into(gmbr);
                         encodeBitmapString(bitmap);
                     }catch (Exception ex){
 
@@ -87,6 +89,8 @@ public class InputNotulensi extends AppCompatActivity {
             etidrapat.setText(getIntent().getExtras().getString("id_rapat"));
             etidnotulensi.setText(getIntent().getExtras().getString("id_notulensi"));
             etPembahasan.setText(getIntent().getExtras().getString("pembahasan"));
+            Glide.with(this).load(Endpoint.base_url+"gambar/notulen/"+getIntent().getExtras().getString("foto")).placeholder(R.drawable.ic_baseline_image_24).into(gmbr);
+
             if(etidnotulensi.getText().toString().matches("")){
                 btninputnotulensi.setText("Simpan");
             }else{
@@ -124,15 +128,22 @@ public class InputNotulensi extends AppCompatActivity {
 
     }
     public void Simpaninputnotulensi(View view){
-        String id_rapat,id_notulensi,pembahasan;
+        String id_rapat,id_notulensi,pembahasan,foto;
         id_rapat = etidrapat.getText().toString();
         id_notulensi = etidnotulensi.getText().toString();
         pembahasan = etPembahasan.getText().toString();
+
         //simpan(id_rapat,pembahasan);
         if(id_notulensi.matches("")){
             simpan(id_rapat,pembahasan,encodeImageString);
         }else {
-            editrapat(id_rapat,id_notulensi,pembahasan,encodeImageString);
+            if(encodeImageString==null){
+                foto = getIntent().getExtras().getString("foto");
+                editrapat(id_rapat,id_notulensi,pembahasan,foto);
+            }else {
+                foto = encodeImageString;
+                editrapat(id_rapat,id_notulensi,pembahasan,foto);
+            }
         }
         Intent intent = new Intent(this, RapatView.class);
         startActivity(intent);
@@ -158,7 +169,7 @@ public class InputNotulensi extends AppCompatActivity {
                 params.put("id_rapat",id_rapat);
                 params.put("id_notulensi",id_notulensi);
                 params.put("pembahasan",pembahasan);
-                params.put("foto",encodeImageString);
+                params.put("foto",foto);
                 return params;
             }
         };

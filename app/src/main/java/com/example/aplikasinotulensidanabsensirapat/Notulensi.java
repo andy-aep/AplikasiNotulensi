@@ -4,6 +4,7 @@ public class Notulensi {
     String pembahasan;
     String id_rapat;
     String id_notulensi;
+    String foto;
 
     public String getPembahasan() {
         return pembahasan;
@@ -37,5 +38,5 @@ public class Notulensi {
         this.foto = foto;
     }
 
-    String foto;
+
 }

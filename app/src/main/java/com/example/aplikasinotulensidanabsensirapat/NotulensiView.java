@@ -60,6 +60,7 @@ public class NotulensiView extends AppCompatActivity {
                         notulensi.setId_rapat(data.getString("id_rapat"));
                         notulensi.setPembahasan(data.getString("pembahasan"));
                         notulensi.setId_notulensi(data.getString("id_notulensi"));
+                        notulensi.setFoto(data.getString("foto"));
                         listnotulensi.add(notulensi);
                         linearLayoutManager = new  LinearLayoutManager(NotulensiView.this, LinearLayoutManager.VERTICAL,false);
                         recyclerView.setLayoutManager(linearLayoutManager);
@@ -71,6 +72,7 @@ public class NotulensiView extends AppCompatActivity {
                                 intent.putExtra("id_rapat",notulensi.getId_rapat());
                                 intent.putExtra("pembahasan",notulensi.getPembahasan());
                                 intent.putExtra("id_notulensi",notulensi.getId_notulensi());
+                                intent.putExtra("foto",notulensi.getFoto());
                                 startActivity(intent);
                             }
                         });

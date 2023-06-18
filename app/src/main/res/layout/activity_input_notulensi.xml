@@ -53,11 +53,11 @@
             android:id="@+id/btnpilihgambar"/>
 
         <ImageView
+            android:id="@+id/gmbr"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="150dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/logo"
-            android:id="@+id/gmbr"/>
+            android:src="@drawable/ic_baseline_image_24" />
 
     </LinearLayout>
 
