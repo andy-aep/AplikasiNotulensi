@@ -1,29 +1,51 @@
 package com.example.aplikasinotulensidanabsensirapat;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 import com.shashank.sony.fancytoastlib.FancyToast;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
 public class InputNotulensi extends AppCompatActivity {
     private EditText etPembahasan,etidrapat,etidnotulensi;
-    private Button btninputnotulensi;
+    private Button btninputnotulensi,btnpilihgambar;
+    private String encodeImageString;
+    private Bitmap bitmap;
+    private ImageView gmbr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +55,33 @@ public class InputNotulensi extends AppCompatActivity {
         etidrapat = findViewById(R.id.editTextTextidrapat);
         etidnotulensi = findViewById(R.id.editTextTextidnotulensi);
         btninputnotulensi = findViewById(R.id.btn_input_notulensi);
+        gmbr = findViewById(R.id.gmbr);
+        btnpilihgambar = findViewById(R.id.btnpilihgambar);
+        ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+            @Override
+            public void onActivityResult(ActivityResult result) {
+                if (result.getResultCode() == RESULT_OK) {
+                    Uri filepath = result.getData().getData();
+                    try
+                    {
+                        InputStream inputStream=getContentResolver().openInputStream(filepath);
+                        bitmap = BitmapFactory.decodeStream(inputStream);
+                        gmbr.setImageBitmap(bitmap);
+                        encodeBitmapString(bitmap);
+                    }catch (Exception ex){
+
+                    }
+                }
+            }
+        });
+        btnpilihgambar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                someActivityResultLauncher.launch(Intent.createChooser(intent,"Pilih gambar"));
+            }
+        });
         if(getIntent().getExtras() != null){
             //btninputnotulensi.setText(getIntent().getExtras().getString("id_notulensi"));
             etidrapat.setText(getIntent().getExtras().getString("id_rapat"));
@@ -44,6 +93,13 @@ public class InputNotulensi extends AppCompatActivity {
                 btninputnotulensi.setText("Edit");
             }
         }
+    }
+
+    private void encodeBitmapString(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
+        byte[] bytesofimages= byteArrayOutputStream.toByteArray();
+        encodeImageString= android.util.Base64.encodeToString(bytesofimages, Base64.DEFAULT);
     }
 
     public void Back(View view){
@@ -74,15 +130,15 @@ public class InputNotulensi extends AppCompatActivity {
         pembahasan = etPembahasan.getText().toString();
         //simpan(id_rapat,pembahasan);
         if(id_notulensi.matches("")){
-            simpan(id_rapat,pembahasan);
+            simpan(id_rapat,pembahasan,encodeImageString);
         }else {
-            editrapat(id_rapat,id_notulensi,pembahasan);
+            editrapat(id_rapat,id_notulensi,pembahasan,encodeImageString);
         }
         Intent intent = new Intent(this, RapatView.class);
         startActivity(intent);
     }
 
-    private void editrapat(String id_rapat, String id_notulensi, String pembahasan) {
+    private void editrapat(String id_rapat, String id_notulensi, String pembahasan, String foto) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Endpoint.editnotulensi, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -102,12 +158,13 @@ public class InputNotulensi extends AppCompatActivity {
                 params.put("id_rapat",id_rapat);
                 params.put("id_notulensi",id_notulensi);
                 params.put("pembahasan",pembahasan);
+                params.put("foto",encodeImageString);
                 return params;
             }
         };
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
-    private void simpan(String id_rapat, String pembahasan) {
+    private void simpan(String id_rapat, String pembahasan,String foto) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Endpoint.simpannotulensi, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -126,6 +183,7 @@ public class InputNotulensi extends AppCompatActivity {
                 Map<String,String> params = new HashMap<>();
                 params.put("id_rapat",id_rapat);
                 params.put("pembahasan",pembahasan);
+                params.put("foto",foto);
                 return params;
             }
         };
