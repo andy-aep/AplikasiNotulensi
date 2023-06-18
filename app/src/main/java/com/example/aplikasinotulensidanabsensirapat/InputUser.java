@@ -84,15 +84,15 @@ public class InputUser extends AppCompatActivity {
         prodi = etprodi.getText().toString();
         kelas = etkelas.getText().toString();
         email = etemail.getText().toString();
-        /*if(cbrole.isChecked()){
+        if(cbrole.isChecked()){
             role = "1";
         }else {
             role = "2";
-        }*/
+        }
         if(getIntent().getExtras() != null){
-            edituser(username,password,nama,prodi,kelas,email,"1");
+            edituser(username,password,nama,prodi,kelas,email,role);
         }else {
-            simpan(username,password,nama,prodi,kelas,email,"1");
+            simpan(username,password,nama,prodi,kelas,email,role);
         }
         Intent intent = new Intent(this, UserView.class);
         startActivity(intent);

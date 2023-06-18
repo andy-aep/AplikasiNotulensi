@@ -49,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("MainActivity", "Scanned");
                     //FancyToast.makeText(MainActivity.this, "Scanned: " + result.getContents(), FancyToast.LENGTH_LONG,FancyToast.SUCCESS,false).show();
                     FancyToast.makeText(MainActivity.this, "Berhasil scan", FancyToast.LENGTH_LONG,FancyToast.SUCCESS,false).show();
-                    absenscan(result.getContents(),"user","user");
+                    sp = getSharedPreferences("UserSession",MODE_PRIVATE);
+                    absenscan(result.getContents(),sp.getString("Username",null),sp.getString("Name",null));
                 }
             });
 
