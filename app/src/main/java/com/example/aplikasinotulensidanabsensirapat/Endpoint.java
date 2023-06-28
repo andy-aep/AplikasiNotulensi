@@ -2,8 +2,8 @@ package com.example.aplikasinotulensidanabsensirapat;
 
 public class Endpoint {
 
-    //private static final String base_url = "http://192.168.1.14/api_app/";
-    public static final String base_url = "http://192.168.1.4/api_app/";
+    static final String base_url = "http://aplikasinotulensiabsensi.my.id/api_app/";
+    //public static final String base_url = "http://192.168.1.4/api_app/";
     public static final String login_url = base_url + "login.php";
     public static final String scanabsen = base_url + "scanabsen.php";
     public static final String getallrapat = base_url + "getallrapat.php";
