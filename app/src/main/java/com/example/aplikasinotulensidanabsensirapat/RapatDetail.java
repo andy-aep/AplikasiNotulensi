@@ -33,11 +33,21 @@ public class RapatDetail extends AppCompatActivity {
     public void Absensi(View view){
         Intent intent = new Intent(this, Absensi_menu.class);
         intent.putExtra("id_rapat",getIntent().getExtras().getString("id_rapat"));
+        intent.putExtra("nama_rapat",getIntent().getExtras().getString("nama_rapat"));
+        intent.putExtra("nama_pinpinan",getIntent().getExtras().getString("nama_pinpinan"));
+        intent.putExtra("tanggal",getIntent().getExtras().getString("tanggal"));
+        intent.putExtra("waktu_mulai",getIntent().getExtras().getString("waktu_mulai"));
+        intent.putExtra("waktu_selesai",getIntent().getExtras().getString("waktu_selesai"));
         startActivity(intent);
     }
     public void Notulensi(View view){
         Intent intent = new Intent(this, NotulensiView.class);
         intent.putExtra("id_rapat",getIntent().getExtras().getString("id_rapat"));
+        intent.putExtra("nama_rapat",getIntent().getExtras().getString("nama_rapat"));
+        intent.putExtra("nama_pinpinan",getIntent().getExtras().getString("nama_pinpinan"));
+        intent.putExtra("tanggal",getIntent().getExtras().getString("tanggal"));
+        intent.putExtra("waktu_mulai",getIntent().getExtras().getString("waktu_mulai"));
+        intent.putExtra("waktu_selesai",getIntent().getExtras().getString("waktu_selesai"));
         startActivity(intent);
     }
 }

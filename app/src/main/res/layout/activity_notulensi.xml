@@ -22,8 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Cetak Notulensi"
-        android:onClick="Cetak"
-        android:visibility="gone"/>
+        android:onClick="Cetak"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

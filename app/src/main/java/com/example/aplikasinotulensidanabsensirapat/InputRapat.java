@@ -107,7 +107,13 @@ public class InputRapat extends AppCompatActivity {
         builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(InputRapat.this, RapatView.class);
+                Intent intent = new Intent(InputRapat.this, RapatDetail.class);
+                intent.putExtra("id_rapat",getIntent().getExtras().getString("id_rapat"));
+                intent.putExtra("nama_rapat",getIntent().getExtras().getString("nama_rapat"));
+                intent.putExtra("nama_pinpinan",getIntent().getExtras().getString("nama_pinpinan"));
+                intent.putExtra("tanggal",getIntent().getExtras().getString("tanggal"));
+                intent.putExtra("waktu_mulai",getIntent().getExtras().getString("waktu_mulai"));
+                intent.putExtra("waktu_selesai",getIntent().getExtras().getString("waktu_selesai"));
                 startActivity(intent);
             }
         });
